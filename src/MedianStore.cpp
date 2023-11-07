@@ -3,6 +3,6 @@
 void MedianStore::add([[maybe_unused]] int x) {
 }
 
-int MedianStore::getMedian() const {
+float MedianStore::getMedian() const {
     return 0;
 }

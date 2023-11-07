@@ -4,5 +4,5 @@
 
 struct MedianStore {
     void add(int x);
-    int getMedian() const;
+    float getMedian() const;
 };
