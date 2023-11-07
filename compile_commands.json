@@ -1,6 +1,11 @@
 [
 {
   "directory": "/home/shs1sf/Downloads/median/Debug",
+  "command": "/usr/bin/c++   -I/home/shs1sf/Downloads/median/include  -g   -std=gnu++17 -o CMakeFiles/heap.dir/test/TestHeap.cpp.o -c /home/shs1sf/Downloads/median/test/TestHeap.cpp",
+  "file": "/home/shs1sf/Downloads/median/test/TestHeap.cpp"
+},
+{
+  "directory": "/home/shs1sf/Downloads/median/Debug",
   "command": "/usr/bin/c++   -I/home/shs1sf/Downloads/median/include  -g   -std=gnu++17 -o CMakeFiles/median.dir/src/MedianStore.cpp.o -c /home/shs1sf/Downloads/median/src/MedianStore.cpp",
   "file": "/home/shs1sf/Downloads/median/src/MedianStore.cpp"
 },
