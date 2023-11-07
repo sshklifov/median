@@ -12,58 +12,58 @@ TEST_CASE("empty container check") {
 
 TEST_CASE("odd elements median") {
     MedianStore m;
-    m.add(1);
-    m.add(2);
-    m.add(18);
-    m.add(3);
-    m.add(4);
+    m.push(1);
+    m.push(2);
+    m.push(18);
+    m.push(3);
+    m.push(4);
 
     CHECK(m.getMedian() == 3.f);
 }
 
 TEST_CASE("even elements median") {
     MedianStore m;
-    m.add(10);
-    m.add(14);
-    m.add(17);
-    m.add(20);
-    m.add(8);
-    m.add(19);
+    m.push(10);
+    m.push(14);
+    m.push(17);
+    m.push(20);
+    m.push(8);
+    m.push(19);
 
     CHECK(m.getMedian() == 15.5f);
 }
 
 TEST_CASE("overflow check") {
     MedianStore m;
-    m.add(INT_MAX);
-    m.add(INT_MAX);
+    m.push(INT_MAX);
+    m.push(INT_MAX);
     CHECK(m.getMedian() == doctest::Approx(INT_MAX));
 }
 
 TEST_CASE("underflow check") {
     MedianStore m;
-    m.add(INT_MIN);
-    m.add(INT_MIN);
+    m.push(INT_MIN);
+    m.push(INT_MIN);
     CHECK(m.getMedian() == doctest::Approx(INT_MIN));
 }
 
 TEST_CASE("repeated elements") {
     MedianStore m;
     const int repeated = 5;
-    m.add(repeated);
-    m.add(20);
-    m.add(repeated);
-    m.add(3);
-    m.add(repeated);
-    m.add(9);
-    m.add(repeated);
+    m.push(repeated);
+    m.push(20);
+    m.push(repeated);
+    m.push(3);
+    m.push(repeated);
+    m.push(9);
+    m.push(repeated);
     CHECK(m.getMedian() == repeated);
 }
 
 TEST_CASE("a hundred elements") {
     MedianStore m;
     for (int i = 0; i < 100; ++i) {
-        m.add(i);
+        m.push(i);
         float median = i / 2.f;
         CHECK(m.getMedian() == median);
     }
@@ -82,7 +82,7 @@ TEST_CASE("bench test") {
         v.reserve(n);
         for (int i = 0; i < n; ++i) {
             int r = distribution(eng);
-            m.add(r);
+            m.push(r);
             v.push_back(r);
         }
         std::vector<int>::iterator medianIt = v.begin() + n / 2;
