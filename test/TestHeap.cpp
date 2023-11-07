@@ -144,8 +144,10 @@ TEST_CASE("bench test") {
     const int n = 10'001;
     SUBCASE("push/pop") {
         for (int t = 0; t < tries; ++t) {
+            // Test both MinHeap, MaxHeap simultaneously
             MinHeap minh;
             MaxHeap maxh;
+            // Reference data container which should yield the same numbers
             std::vector<int> ref;
             ref.reserve(n);
             for (int i = 0; i < n; ++i) {
@@ -178,7 +180,6 @@ TEST_CASE("bench test") {
 
     SUBCASE("exchangeTop") {
         for (int t = 0; t < tries; ++t) {
-            // Test both MinHeap and MaxHeap simultaneously
             MinHeap minHeap;
             MaxHeap maxHeap;
             std::set<int> minSet; //< Expected state of minHeap as a std::set
@@ -194,15 +195,17 @@ TEST_CASE("bench test") {
             for (int i = 0; i < m; ++i) {
                 const int randomInt = distribution(eng);
 
-                minSet.erase(minSet.begin());
-                minSet.emplace(randomInt);
                 int newTop = randomInt;
                 minHeap.exchangeTop(newTop);
+                // Simulate exchangeTop operation on the set
+                minSet.erase(minSet.begin());
+                minSet.emplace(randomInt);
 
-                maxSet.erase(--maxSet.end());
-                maxSet.emplace(randomInt);
                 newTop = randomInt;
                 maxHeap.exchangeTop(newTop);
+                // Simulate exchangeTop operation on the set
+                maxSet.erase(--maxSet.end());
+                maxSet.emplace(randomInt);
             }
 
             bool same = true;
@@ -214,6 +217,7 @@ TEST_CASE("bench test") {
                 minHeap.pop();
             }
             REQUIRE_MESSAGE(same, "MinHeap exchangeTop differes from std::set erase+emplace");
+
             for (auto it = maxSet.rbegin(); it != maxSet.rend(); ++it) {
                 if (maxHeap.top() != *it) {
                     same = false;

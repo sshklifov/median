@@ -3,6 +3,11 @@
 #include <vector>
 #include <functional>
 
+/// Heap data structure, similar to std::priority_queue
+///
+/// Has an additional method exchangeTop, which allows
+/// to remove the top element and insert a new element
+/// at the cost of a single insertion.
 template <typename Compare>
 struct Heap {
     void push(int x) {
@@ -35,7 +40,10 @@ struct Heap {
     }
 
     void exchangeTop(int& newTop) {
-        std::swap(heap.at(0), newTop);
+        if (heap.empty()) {
+            throw std::out_of_range("Heap is empty");
+        }
+        std::swap(heap[0], newTop);
         return siftDown(0);
     }
 

@@ -5,8 +5,11 @@
 
 void MedianStore::push(int x) {
     if (smaller.size() == 0) {
+        // Implies bigger.size() == 0 and that the container is empty.
         smaller.push(x);
     } else if (smaller.size() == bigger.size()) {
+        // 'smaller' should grow with 1 element.
+        // This might be 'x' or the min element in 'bigger'.
         if (x <= bigger.top()) {
             smaller.push(x);
         } else {
@@ -14,7 +17,8 @@ void MedianStore::push(int x) {
             smaller.push(x);
         }
     } else {
-        // smaller.size() > bigger.size()
+        // Implies smaller.size() > bigger.size(). 'bigger' should grow with 1 element.
+        // This might be 'x' or the max element in 'smaller'.
         if (x >= smaller.top()) {
             bigger.push(x);
         } else {
@@ -29,7 +33,9 @@ void MedianStore::push(int x) {
 float MedianStore::getMedian() const {
     if (smaller.empty()) {
         throw std::out_of_range("Empty container");
-    } else if (smaller.size() > bigger.size()) {
+    } else if (smaller.size() != bigger.size()) {
+        // Implies smaller.size() == bigger.size() + 1.
+        // The median is the max of 'smallest' heap.
         return static_cast<float>(smaller.top());
     } else {
         float median1 = smaller.top();
